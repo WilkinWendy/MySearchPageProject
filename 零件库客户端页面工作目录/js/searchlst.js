@@ -412,30 +412,66 @@ var sortTabHandler = {
             });
             $(this).addClass("select");
 
-            var condition = pageHelper.getQueryCondition();
-
-            if (!pageHelper.checkQueryCondition(condition)) {
-                return;
-            }
-            //////1..ajax调用
-            ////unitStore.ajax({
-            ////    apiName: "",
-            ////    data: {
-            ////    },
-            ////    success: function (result) {
-            ////        var resultData = result.data;
-            ////        pageHelper.bindSearchData(resultData);        //       
-            ////    }.
-            ////});
-
-            //2..制作测试数据
-            var resultData = serviceHelper.search(condition);
-            pageHelper.bindSearchData(resultData);
-
+            searchHelper.LoadSearchData();
         });
     },
     currentSortType: ""
 }
+
+var searchHelper = {
+    //加载
+    LoadSearchData: function () {
+        try {
+            var condition = pageHelper.getQueryCondition();
+            if (!pageHelper.checkQueryCondition(condition)) {
+                return;
+            }
+            ////1..ajax调用
+            //unitStore.ajax({
+            //    apiName: "",
+            //    data: {
+            //    },
+            //    success: function (result) {
+            //        var resultData = result.data;
+            //        pageHelper.bindSearchData(resultData);
+            //    }
+            //});
+
+            //2..制作测试数据
+            var resultData = serviceHelper.search(condition);
+            pageHelper.bindSearchData(resultData);
+        }
+        catch (ex) {
+            console.error(ex.message);
+        }
+    },
+    LoadMoreSearchData: function () {
+        try {
+            var condition = pageHelper.getQueryCondition();
+            if (!pageHelper.checkQueryCondition(condition)) {
+                return;
+            }
+            ////1..ajax调用
+            //unitStore.ajax({
+            //    apiName: "",
+            //    data: {
+            //    },
+            //    success: function (result) {
+            //        var resultData = result.data;                    //        
+            //        pageHelper.appendSearchData(resultData);
+            //    }
+            //});
+
+            //2..制作测试数据
+            var resultData = serviceHelper.search(condition);
+            pageHelper.appendSearchData(resultData);
+
+        }
+        catch (ex) {
+            console.error(ex.message);
+        }
+    }
+};
 
 var mainHelper = {
     init: function () {
@@ -446,52 +482,13 @@ var mainHelper = {
     bindEvent: function () {
         //搜索按钮点击事件
         $("#btn_search-btn").on("click", function () {
-            try {
-                var condition = pageHelper.getQueryCondition();
-                if (!pageHelper.checkQueryCondition(condition)) {
-                    return;
-                }
-                ////1..ajax调用
-                //unitStore.ajax({
-                //    apiName: "",
-                //    data: {
-                //    },
-                //    success: function (result) {
-                //        var resultData = result.data;
-                //        pageHelper.bindSearchData(resultData);
-                //    }
-                //});
-
-                //2..制作测试数据
-                var resultData = serviceHelper.search(condition);
-                pageHelper.bindSearchData(resultData);
-            }
-            catch (ex) {
-                console.error(ex.message);
-            }
+            searchHelper.LoadSearchData();
         });
         //内容页面滑动至底部触发事件
         $(window).on("scroll", function () {
             try {
                 if (common.isElementScrollToBottom(this)) {
-                    var condition = pageHelper.getQueryCondition();
-                    if (!pageHelper.checkQueryCondition(condition)) {
-                        return;
-                    }
-                    ////1..ajax调用
-                    //unitStore.ajax({
-                    //    apiName: "",
-                    //    data: {
-                    //    },
-                    //    success: function (result) {
-                    //        var resultData = result.data;                    //        
-                    //        pageHelper.appendSearchData(resultData);
-                    //    }
-                    //});
-
-                    //2..制作测试数据
-                    var resultData = serviceHelper.search(condition);
-                    pageHelper.appendSearchData(resultData);
+                    searchHelper.LoadMoreSearchData();
                 }
             }
             catch (ex) {
@@ -500,25 +497,7 @@ var mainHelper = {
         })
     },
     InitPageData: function () {
-        //var condition = pageHelper.getQueryCondition();
-
-        //if (!pageHelper.checkQueryCondition(condition)) {
-        //    return;
-        //}
-        //////1..ajax调用
-        ////unitStore.ajax({
-        ////    apiName: "",
-        ////    data: {
-        ////    },
-        ////    success: function (result) {
-        ////        var resultData = result.data;
-        ////        pageHelper.bindSearchData(resultData);        //       
-        ////    }
-        ////});
-
-        ////2..制作测试数据
-        //var resultData = serviceHelper.search(condition);
-        //pageHelper.bindSearchData(resultData);
+        //searchHelper.LoadSearchData();
     }
 };
 
