@@ -29,8 +29,8 @@
                     console.info("请求失败：");
                     var result = {
                         "status": {
-                            "code": 400,           //返回码,200表示成功，其他失败
-                            "msg": "连接服务器异常，请重试！" //提示信息
+                            "code": dd.status.code,           //返回码,200表示成功，其他失败
+                            "msg": "连接服务器异常，请重试！:" + dd.status.msg//提示信息
                         },
                         "data": {}
                     };
