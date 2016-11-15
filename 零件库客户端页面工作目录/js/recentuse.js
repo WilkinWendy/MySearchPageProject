@@ -174,6 +174,35 @@ var elementHelper =
 
     };
 
+var searchHelper = {
+    //加载
+    LoadSearchData: function () {
+        try {
+            var condition = pageHelper.getQueryCondition();
+
+            ////1..ajax调用
+            //unitStore.ajax({
+            //    apiName: "",
+            //    data: {
+            //    },
+            //    success: function (result) {
+            //        var resultData = result.data;
+            //        pageHelper.bindSearchData(resultData);
+            //    }
+            //});
+
+            //2..制作测试数据
+            var resultData = serviceHelper.search(condition);
+            pageHelper.bindSearchData(resultData);
+        }
+        catch (ex) {
+            console.error(ex.message);
+        }
+    }
+
+};
+
+
 var mainHelper = {
     init: function () {
         this.InitPageData();
@@ -183,22 +212,7 @@ var mainHelper = {
 
     },
     InitPageData: function () {
-        var condition = pageHelper.getQueryCondition();
-
-        ////1..ajax调用
-        //unitStore.ajax({
-        //    apiName: "",
-        //    data: {
-        //    },
-        //    success: function (result) {
-        //        var resultData = result.data;
-        //        pageHelper.bindSearchData(resultData);
-        //    }
-        //});
-
-        //2..制作测试数据
-        var resultData = serviceHelper.search(condition);
-        pageHelper.bindSearchData(resultData);
+        searchHelper.LoadSearchData()
     }
 };
 
