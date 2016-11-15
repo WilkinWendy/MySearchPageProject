@@ -145,7 +145,8 @@ var pageHelper = {
     }
 };
 var pageState = {
-
+    pageCurrentData: {},
+    currentIndex: 0
 };
 
 var elementHelper =

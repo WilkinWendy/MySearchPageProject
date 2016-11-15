@@ -186,10 +186,10 @@ var pageHelper = {
             });
             $("#ul_collect-products-lst").html(totalhtml);
 
-            ////更新页面用于存储当前数据的变量
-            //pageState.pageCurrentData.sources = [];
-            //pageState.pageCurrentData.sources = data.sources;
-            //pageState.currentIndex = 0;
+            //更新页面用于存储当前数据的变量
+            pageState.pageCurrentData.sources = [];
+            pageState.pageCurrentData.sources = data.sources;
+            pageState.currentIndex = 0;
         }
         catch (ex) {
             throw new Error("pageHelper.bindSearchData()执行异常：原因是" + ex.message)
@@ -206,10 +206,10 @@ var pageHelper = {
                 });
                 $("#ul_collect-products-lst").append(totalhtml);
 
-                ////更新页面用于存储当前数据的变量
-                //pageState.pageCurrentData.sources = pageState.pageCurrentData.sources.concat(data.sources);
-                //pageState.currentIndex += 1;
-                ////alert("当前共加载了" + (pageState.currentIndex + 1) + "页");
+                //更新页面用于存储当前数据的变量
+                pageState.pageCurrentData.sources = pageState.pageCurrentData.sources.concat(data.sources);
+                pageState.currentIndex += 1;
+                //alert("当前共加载了" + (pageState.currentIndex + 1) + "页");
 
             }
         }
@@ -219,7 +219,8 @@ var pageHelper = {
     }
 };
 var pageState = {
-
+    currentIndex: 0,
+    pageCurrentData: {}
 };
 
 var elementHelper =
