@@ -297,7 +297,7 @@ var pageHelper = {
     checkQueryCondition: function (condition) {
         var result = true;
         var keyname = condition.keyName;
-        if (keyname == undefined || keyname == "") {
+        if (keyname == undefined || keyname.trim() == "") {
             myalert.msg(
                 {
                     title: "提示",
