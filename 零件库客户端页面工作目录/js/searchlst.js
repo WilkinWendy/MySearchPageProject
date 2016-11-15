@@ -351,7 +351,7 @@ var pageHelper = {
             }
         }
         catch (ex) {
-            throw new Error("pageHelper.bindSearchData()执行异常：原因是" + ex.message)
+            throw new Error("pageHelper.appendSearchData()执行异常：原因是" + ex.message)
         }
     },
     //根据页面状态变量更新页面的总零件数记录
