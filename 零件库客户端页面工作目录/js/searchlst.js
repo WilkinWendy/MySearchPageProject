@@ -358,6 +358,9 @@ var pageHelper = {
     updateTotalCount: function () {
         var count = pageState.pageCurrentData.sources.length;
         $("#unitCurrentCount").html(count.toString());
+    },
+    setInputSearchValueByKey: function (key) {
+        $("#input_search-btn").val(key);
     }
 };
 var pageState = {
@@ -497,7 +500,12 @@ var mainHelper = {
         })
     },
     InitPageData: function () {
-        //searchHelper.LoadSearchData();
+        var keyname = common.getKeyFromUrl("keyName");
+
+        if (keyname != null && keyname.trim() != "") {
+            pageHelper.setInputSearchValueByKey(keyname);
+            searchHelper.LoadSearchData();
+        }
     }
 };
 
