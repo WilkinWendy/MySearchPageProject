@@ -414,9 +414,9 @@ var sortTabHandler = {
 
             var condition = pageHelper.getQueryCondition();
 
-            //if (!pageHelper.checkQueryCondition(condition)) {
-            //    return;
-            //}
+            if (!pageHelper.checkQueryCondition(condition)) {
+                return;
+            }
             //////1..ajax调用
             ////unitStore.ajax({
             ////    apiName: "",
@@ -425,7 +425,7 @@ var sortTabHandler = {
             ////    success: function (result) {
             ////        var resultData = result.data;
             ////        pageHelper.bindSearchData(resultData);        //       
-            ////    }
+            ////    }.
             ////});
 
             //2..制作测试数据
