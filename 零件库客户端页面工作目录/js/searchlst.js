@@ -429,6 +429,13 @@ var searchHelper = {
             if (!pageHelper.checkQueryCondition(condition)) {
                 return;
             }
+
+            loadLayer.show(
+                {
+                    title: "",
+                    msg: "正在加载中"
+                }
+                );
             ////1..ajax调用
             //unitStore.ajax({
             //    apiName: "",
@@ -437,12 +444,19 @@ var searchHelper = {
             //    success: function (result) {
             //        var resultData = result.data;
             //        pageHelper.bindSearchData(resultData);
+            //        loadLayer.hide();
             //    }
             //});
 
             //2..制作测试数据
             var resultData = serviceHelper.search(condition);
-            pageHelper.bindSearchData(resultData);
+
+            setTimeout(function () {
+                loadLayer.hide();
+                pageHelper.bindSearchData(resultData);
+            }, 1000);
+
+
         }
         catch (ex) {
             console.error(ex.message);
@@ -454,6 +468,14 @@ var searchHelper = {
             if (!pageHelper.checkQueryCondition(condition)) {
                 return;
             }
+
+            loadLayer.show(
+                {
+                    title: "",
+                    msg: "正在加载中"
+                }
+                );
+
             ////1..ajax调用
             //unitStore.ajax({
             //    apiName: "",
@@ -462,13 +484,18 @@ var searchHelper = {
             //    success: function (result) {
             //        var resultData = result.data;                    //        
             //        pageHelper.appendSearchData(resultData);
+            //        loadLayer.hide();   
             //    }
             //});
 
-            //2..制作测试数据
-            var resultData = serviceHelper.search(condition);
-            pageHelper.appendSearchData(resultData);
+            //2..制作测试数据            
 
+
+            setTimeout(function () {
+                var resultData = serviceHelper.search(condition);
+                loadLayer.hide();
+                pageHelper.appendSearchData(resultData);
+            }, 1000);
         }
         catch (ex) {
             console.error(ex.message);
