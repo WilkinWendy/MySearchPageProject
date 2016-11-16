@@ -393,8 +393,8 @@ var elementHelper =
             html += '     <div class="clear ico-box"><span><i class="ico-download"></i>' + downloadCount + '</span><span><i class="ico-search"></i>' + viewCount + '</span></div>'
             html += '     <div class="txt-box">'
             html += '         <p title="' + repoName + '">库名：<a href="#">' + repoName + '</a></p>'
-            html += '         <p title="这里显示分类全称">' + typeName + '</p>'
-            html += '         <p title="这里显示型号全称">型号：' + modelNumber + '</p>'
+            html += '         <p title="' + typeName + '">' + typeName + '</p>'
+            html += '         <p title="' + modelNumber + '">型号：' + modelNumber + '</p>'
             html += '     </div>'
             html += ' </li>'
 
