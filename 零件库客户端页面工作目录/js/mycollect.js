@@ -216,6 +216,53 @@ var pageHelper = {
         catch (ex) {
             throw new Error("pageHelper.appendSearchData()执行异常：原因是" + ex.message)
         }
+    },
+    //绑定取消收藏事件
+    bindEvent: function () {
+        //取消收藏
+        $(".undoCollect").unbind();
+        $(".undoCollect").on("click", function () {
+            var parent_li = this.parentNode.parentNode.parentNode;
+            var repoKey = "";
+
+            var okFn = function () {
+                try {
+                    ////1..从服务端删除，成功后删除节点
+                    //unitStore.ajax({
+                    //    apiName: apiName,
+                    //    data: {
+                    //        repoKey: repoKey
+                    //    },
+                    //    success: function (result) {
+                    //        if (result.status.code = 200) {
+                    //            common.removeElement(parent_li);
+                    //        }
+                    //    }
+                    //});
+
+                    //2..本地测试，直接删除节点
+                    common.removeElement(parent_li);
+                }
+                catch (ex) {
+                    console.error(ex.message);
+                }
+            };
+            var noFn = function () {
+                try {
+
+                }
+                catch (ex) {
+                    console.error(ex.message);
+                }
+            };
+
+            myalert.confirm({
+                title: "提示",
+                msg: "您确定要取消收藏吗？",
+                okFn: okFn,
+                noFn: noFn
+            });
+        });
     }
 };
 var pageState = {
@@ -272,6 +319,7 @@ var searchHelper = {
             //    success: function (result) {
             //        var resultData = result.data;
             //        pageHelper.bindSearchData(resultData);
+            //        pageHelper.bindEvent();
             //        loadLayer.hide();
             //    }
             //});
@@ -282,6 +330,7 @@ var searchHelper = {
             setTimeout(function () {
                 loadLayer.hide();
                 pageHelper.bindSearchData(resultData);
+                pageHelper.bindEvent();
             }, 1000);
         }
         catch (ex) {
@@ -305,49 +354,6 @@ var mainHelper = {
     },
 
     bindEvent: function () {
-        //取消收藏
-        $(".undoCollect").on("click", function () {
-            var parent_li = this.parentNode.parentNode.parentNode;
-            var repoKey = "";
-
-            var okFn = function () {
-                try {
-                    ////1..从服务端删除，成功后删除节点
-                    //unitStore.ajax({
-                    //    apiName: apiName,
-                    //    data: {
-                    //        repoKey: repoKey
-                    //    },
-                    //    success: function (result) {
-                    //        if (result.status.code = 200) {
-                    //            common.removeElement(parent_li);
-                    //        }
-                    //    }
-                    //});
-
-                    //2..本地测试，直接删除节点
-                    common.removeElement(parent_li);
-                }
-                catch (ex) {
-                    console.error(ex.message);
-                }
-            };
-            var noFn = function () {
-                try {
-
-                }
-                catch (ex) {
-                    console.error(ex.message);
-                }
-            };
-
-            myalert.confirm({
-                title: "提示",
-                msg: "您确定要取消收藏吗？",
-                okFn: okFn,
-                noFn: noFn
-            });
-        });
 
     },
     InitPageData: function () {
