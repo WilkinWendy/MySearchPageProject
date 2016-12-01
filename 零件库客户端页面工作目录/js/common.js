@@ -112,15 +112,35 @@
     getKeyArrayFromKeyWord: function (keyword) {
         var arr = keyword.split(" ");
         var arrReturn = new Array();
-        for(var i=0;i<arr.length;i++)
-        {
+        for (var i = 0; i < arr.length; i++) {
             var item = arr[i];
-            if (item != "")
-            {
+            if (item != "") {
                 arrReturn.push(item);
             }
         }
         return arrReturn;
+    },
+
+    //给一串文本中指定字符加上带有指定class的指定标签
+    //参数示例
+    //var condition =
+    //{
+    //    labelName: "labelName",
+    //    className: "className",
+    //    keyArray: "keyArray"
+    //}
+    bindTextWithLabelAndClassForSomeKeys: function (condition, sourceText) {
+        var labelName = condition.labelName;
+        var className = condition.className;
+        var keyArray = condition.keyArray;
+
+        var result = sourceText;
+        $.each(keyArray, function (i, v) {
+            var reg = new RegExp("(" + v + ")");
+            result = result.replace(reg, "<" + labelName + " class= " + className + " >" + v + "</" + labelName + ">");
+        });
+
+        return result;
     }
 
 }
