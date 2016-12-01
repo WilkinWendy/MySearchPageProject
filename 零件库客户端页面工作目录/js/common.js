@@ -107,6 +107,20 @@
             windowHeight = document.body.clientHeight;
         }
         return windowHeight;
+    },
+    //从搜索文字中提取关键字
+    getKeyArrayFromKeyWord: function (keyword) {
+        var arr = keyword.split(" ");
+        var arrReturn = new Array();
+        for(var i=0;i<arr.length;i++)
+        {
+            var item = arr[i];
+            if (item != "")
+            {
+                arrReturn.push(item);
+            }
+        }
+        return arrReturn;
     }
 
 }

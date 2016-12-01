@@ -317,8 +317,15 @@ var pageHelper = {
             common.scrollToTop(window);
 
             var totalhtml = ''
+
+            var keyName =  pageHelper.getQueryCondition().keyName;
+            var keyNameArray = common.getKeyArrayFromKeyWord(keyName);
+            var elementCondition = {
+                keyNameArray: keyNameArray
+            };
+
             $.each(data.sources, function (i, d) {
-                totalhtml += elementHelper.createSingleElementByData(d);
+                totalhtml += elementHelper.createSingleElementByData(d,elementCondition);
             });
             $("#ul_search-products-lst").html(totalhtml);
 
@@ -336,10 +343,17 @@ var pageHelper = {
     appendSearchData: function (data) {
         try {
             var sources = data.sources;
+            var keyName = pageHelper.getQueryCondition().keyName;
+            var keyNameArray = common.getKeyArrayFromKeyWord(keyName);
+            var elementCondition = {
+                keyNameArray: keyNameArray
+            };
+
+
             if (sources.length != 0) {
                 var totalhtml = ''
                 $.each(sources, function (i, d) {
-                    totalhtml += elementHelper.createSingleElementByData(d);
+                    totalhtml += elementHelper.createSingleElementByData(d, elementCondition);
                 });
                 $("#ul_search-products-lst").append(totalhtml);
 
@@ -362,6 +376,13 @@ var pageHelper = {
     setInputSearchValueByKey: function (key) {
         $("#input_search-btn").val(key);
     }
+    , getDate: function () {
+        setTimeout(function () {
+            var list = window.external.GetDate();
+            
+        }, 1);
+
+    },
 };
 var pageState = {
     currentIndex: 0,
@@ -369,12 +390,13 @@ var pageState = {
     pageDataHeight: 6,
     pageCurrentData: {
         "sources": []
-    }
+    }    
 };
 
 var elementHelper =
     {
-        createSingleElementByData: function (data) {
+        //data是服务请求回来的单条json，condition是与生成html有关的其他条件
+        createSingleElementByData: function (data,condition) {
             var unitName = data.unitName;
             var spectialTxt = data.spectialTxt;
             var imagePath = data.imagePath;
@@ -383,6 +405,9 @@ var elementHelper =
             var repoName = data.repoName;
             var typeName = data.typeName;
             var modelNumber = data.modelNumber;
+
+            var keyNameArray = condition.keyNameArray;//数组
+
             var html = '';
             html += ' <li>'
             html += '     <div class="pic-box">'
