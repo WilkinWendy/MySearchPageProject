@@ -136,7 +136,15 @@
 
         var result = sourceText;
         $.each(keyArray, function (i, v) {
-            var reg = new RegExp("(" + v + ")");
+            var strForReg = v
+                .replace(/\./, '\\\.')
+                .replace(/\+/, '\\\+')
+                .replace(/\*/, '\\\*')
+                .replace(/\(/, '\\\(')
+                .replace(/\)/, '\\\)')
+                .replace(/\{/, '\\\{')
+                .replace(/\}/, '\\\}');
+            var reg = new RegExp("(" + strForReg + ")");
             result = result.replace(reg, "<" + labelName + " class= " + className + " >" + v + "</" + labelName + ">");
         });
 
