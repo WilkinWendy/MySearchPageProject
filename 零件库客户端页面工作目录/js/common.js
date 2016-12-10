@@ -135,8 +135,9 @@
         var keyArray = condition.keyArray;
 
         var result = sourceText;
+        var strForReg = "";
         $.each(keyArray, function (i, v) {
-            var strForReg = v
+            var temp = v
                 .replace(/\./, '\\\.')
                 .replace(/\+/, '\\\+')
                 .replace(/\*/, '\\\*')
@@ -144,9 +145,17 @@
                 .replace(/\)/, '\\\)')
                 .replace(/\{/, '\\\{')
                 .replace(/\}/, '\\\}');
-            var reg = new RegExp("(" + strForReg + ")");
-            result = result.replace(reg, "<" + labelName + " class= " + className + " >" + v + "</" + labelName + ">");
+            if (strForReg == "")
+            {
+                strForReg += temp;
+            }
+            else
+            {
+                strForReg += "|"+temp;
+            }
         });
+        var reg = new RegExp("(" + strForReg + ")","g");
+        result = result.replace(reg, "<" + labelName + " class= " + className + " >" + "$1" + "</" + labelName + ">");
 
         return result;
     }
