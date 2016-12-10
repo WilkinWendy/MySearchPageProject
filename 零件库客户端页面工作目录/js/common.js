@@ -154,7 +154,7 @@
                 strForReg += "|"+temp;
             }
         });
-        var reg = new RegExp("(" + strForReg + ")","g");
+        var reg = new RegExp("((" + strForReg + ")+)","g");
         result = result.replace(reg, "<" + labelName + " class= " + className + " >" + "$1" + "</" + labelName + ">");
 
         return result;
